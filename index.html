@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/assets/jquery.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Poller+One' rel='stylesheet' type='text/css'>
+
+<style>
+
+    button {
+        position: relative;
+        top: -100px;
+    }
+    
+.robot {
+  position: relative;
+  left: 500px;
+}
+
+.beep {
+  width: 5px;
+  height: 0;
+  border: 5px solid transparent;
+  border-top: 10px solid #015754;
+  border-bottom: 80px solid #057774;
+  position: relative;
+  left: 134px;
+}
+
+@keyframes blink {
+  50% {
+    background: radial-gradient(circle, blue 15%, transparent 40%), #80f0ed;
+    background-size: 50%;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    background: -webkit-radial-gradient(circle, blue 15%, transparent 40%), #80f0ed;
+    background-size: 50%;
+  }
+}
+@-moz-keyframes blink {
+  50% {
+    background: -moz-radial-gradient(circle, blue 15%, transparent 40%), #80f0ed;
+    background-size: 50%;
+  }
+}
+
+.laser {
+  animation: blink .5s infinite;
+  -webkit-animation: blink .5s infinite;
+  -moz-animation: blink .5s infinite;
+}
+.brain {
+  background: radial-gradient(circle, white 15%, transparent 40%), #80f0ed;
+  background: -moz-radial-gradient(circle, white 15%, transparent 40%), #80f0ed; 
+  background: -webkit-radial-gradient(circle, white 15%, transparent 40%), #80f0ed;
+  background-size: 50%;
+  height: 120px;
+  width: 140px;
+  border-radius: 60px 60px 40px 40px;
+  border-bottom: 35px solid #057774;
+  position: relative;
+  left: 70px;
+}
+.torso {
+  height: 0;
+  width: 100px;
+  border-bottom: 300px solid #80f0ed;
+  border-left: 90px solid transparent;
+  border-right: 90px solid transparent;
+  border-radius: 120px 120px 50px 50px;
+}
+    
+@keyframes moveleft {
+    50% {
+        left: -100px;
+        top: -20px;
+    }
+    }
+@-webkit-keyframes moveleft {
+    50% {
+        left: -100px;
+        top: -20px;
+    }
+    }
+@-moz-keyframes moveleft {
+    50% {
+        left: -100px;
+        top: -20px;
+    }
+    }
+    
+.leftmove {
+  animation: moveleft 1s infinite;
+  -webkit-animation: moveleft 1s infinite;
+  -moz-animation: moveleft 1s infinite;
+}
+    
+.left {
+  font-family: 'Poller One', verdana, arial, sans-serif;
+  font-weight: bold;
+  font-size: 250px;
+  color: #057774;
+  transform: rotate(215deg);
+  -webkit-transform: rotate(215deg);
+  -moz-transform: rotate(215deg);
+  position: relative;
+  top: -5px;
+  left: -130px;
+  z-index: -1;
+}
+@keyframes moveright {
+    50% {
+        left: 100px;
+        top: -320px;
+    }
+    }
+@-webkit-keyframes moveright {
+    50% {
+        left: 100px;
+        top: -320px;
+    }
+    }
+@-moz-keyframes moveright {
+    50% {
+        left: 100px;
+        top: -320px;
+    }
+    }
+    
+.rightmove {
+  animation: moveright 1s infinite;
+  -webkit-animation: moveright 1s infinite;
+  -moz-animation: moveright 1s infinite;
+}
+    
+.right {
+  font-family: 'Poller One', verdana, arial, sans-serif;
+  font-weight: bold;
+  font-size: 250px;
+  color: #057774;
+  transform: scaleY(-1) rotate(35deg);
+  -webkit-transform: scaleY(-1) rotate(35deg);
+  -moz-transform: scaleY(-1) rotate(35deg);
+  position: relative;
+  top: -305px;
+  left: 130px;
+  z-index: -1;
+}
+.foot1 {
+ height: 40px;
+ width: 40px;
+ background: #ccc;
+ border-radius: 40px;
+ border: 15px solid #057774;
+ position: relative;
+ left: 60px;
+ top: -10px;
+ z-index: -1;
+}
+.foot2 {
+ height: 40px;
+ width: 40px;
+ background: #ccc;
+ border-radius: 40px;
+ border: 15px solid #057774;
+ position: relative;
+ left: 150px;
+ top: -80px;
+ z-index: -1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="robot">
+  <div class="beep"></div>
+  <div class="brain"></div>
+  <div class="torso">
+    <div class="left">j</div>
+    <div class="right">j</div>
+  </div>
+  <div class="foot1"></div>
+  <div class="foot2"></div>
+</div>
+
+<button class="flash">laser eyes on/off</button>
+<button class="color">change color!</button>
+<button class="danceleft">start/stop dance left!</button>
+<button class="danceright">start/stop dance right!</button>
+
+<script>
+// When eyes button is clicked, toggle laser class on brain
+$(".flash").click(function() {
+  $(".brain").toggleClass('laser');
+});
+
+// When color button is clicked...
+$(".color").click(function() {
+  // assign each named color a random number 0-255
+  var red = Math.floor(Math.random() * 255);
+  var green = Math.floor(Math.random() * 255);
+  var blue = Math.floor(Math.random() * 255);
+  
+  //
+  var randomRGBA = 'rgba('+red+','+green+','+blue+')';
+  
+  $("body").css("background", randomRGBA);
+  //Display the RGBA value in an alert window
+  //alert(randomRGBA);
+});
+
+$(".danceleft").click(function() {
+  $(".left").toggleClass("leftmove");
+});
+    
+$(".danceright").click(function() {
+  $(".right").toggleClass("rightmove");
+});
+
+</script>
+
+</body>
